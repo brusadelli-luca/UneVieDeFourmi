@@ -1,56 +1,74 @@
 from functions import *
 from classes import *
+from graph import *
 
-file_name = '../Fourmilieres/fourmiliere_un.txt'
+anthill = 1
 
-param = import_data(file_name)
-print(param)
-matrix_tup = matrix_data(param)
+anthills_names = {1 : '../Fourmilieres/fourmiliere_un.txt', \
+                    2 : '../Fourmilieres/fourmiliere_deux.txt', \
+                    3 : '../Fourmilieres/fourmiliere_trois.txt', \
+                    4 : '../Fourmilieres/fourmiliere_quatre.txt', \
+                    5 : '../Fourmilieres/fourmiliere_cinq.txt' \
+                       }
 
-matrix = matrix_tup[0]
-edge_list_tup = matrix_tup[1]
+file_name = anthills_names[anthill] # print('file name', file_name)
 
-# print(matrix)
+param = import_data(file_name) # print('param', param)
 
 ant_nb = param[0]
 node_nb = param[1]
 node_list = param[2]
 edge_nb = param[3]
 edge_list = param[4]
+# print('edge_list', edge_list)
 
-matrix_size = node_nb + 2
+edge_list = name_to_index(node_list,edge_list) # print('edge_list', edge_list)
 
-node_list_obj = []
-node_list_obj.append(Node(node_list[0], ant_nb))
+# matrix = matrix_data(param, edge_list)
+# print('matrix\n',matrix)
 
-for i in range(1,matrix_size - 1):
+node_list = [*range(node_nb)]
+# print('node_list', node_list, 'edge_list', edge_list)
 
-    node_list_obj.append(Node(node_list[i],1))
+hill1 = Anthill(ant_nb, node_nb, node_list)
 
-node_list_obj.append(Node(node_list[matrix_size - 1], ant_nb))
+G = graph_creation(0, node_list, edge_list, show=False)
+print(G.graph,G.nodes.data())
+# print(G.nodes[0])
+# print(G)
 
-print(node_list_obj)
-
-
-#########
-node_list = [*range(matrix_size)]
-#########
-print(node_list,edge_list_tup)
-
-
-G = graph_creation(node_list, edge_list_tup)
-
-import matplotlib.pyplot as plt
-
-# G = nx.petersen_graph()
 # print(list(G.nodes))
 # print(list(G.edges))
-# print(list(G.nodes))
-# subax1 = plt.subplot(121)
 
-nx.draw(G, with_labels=True, font_weight='bold')
+for step in range(2):
+    print('\nSTEP ' + str(step) + '\n')
+    print(G.graph,G.nodes.data())
 
-# subax2 = plt.subplot(122)
-# nx.draw_shell(G, nlist=[range(5, 10), range(5)], with_labels=True, font_weight='bold')
+    for ant in reversed(hill1.ants):
+        print(ant)
+        node = ant.origin
+        print('//node//',node)
+        # print('//G.adj[' + str(node) + ']//',G.adj[node])
+        # print('//list(G.adj[' + str(node) + '])//',list(G.adj[node]))
+        # print('//list(G.adj[' + str(node) + '][0])//', list(G.adj[node])[0])
+        print('\n')
 
-plt.show()
+        # node = G.nodes[ant.origin]
+        
+        # print('node[1]', node[1])
+        # for node in list(G.nodes):
+        # print(G.nodes[node])
+        # print(G.nodes[node]['ants'])
+
+        
+        for adj in list(G.adj[node]):
+            # print(G.nodes[adj])
+            # print(G.nodes[adj]['ants'])
+
+            if G.nodes[adj]['ants'] == 0:
+                G.nodes[node]['ants'] = G.nodes[node]['ants'] - 1
+                G.nodes[adj]['ants'] = G.nodes[adj]['ants'] + 1
+
+        ant.origin = adj
+        
+    G.graph['step'] = G.graph['step'] + 1
