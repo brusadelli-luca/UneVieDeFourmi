@@ -2,14 +2,16 @@ from functions import *
 from classes import *
 from graph import *
 
-anthill = 1
+anthill = 2
 
-anthills_names = {1 : '../Fourmilieres/fourmiliere_un.txt', \
-                    2 : '../Fourmilieres/fourmiliere_deux.txt', \
-                    3 : '../Fourmilieres/fourmiliere_trois.txt', \
-                    4 : '../Fourmilieres/fourmiliere_quatre.txt', \
-                    5 : '../Fourmilieres/fourmiliere_cinq.txt' \
-                       }
+# For Repo : '../Fourmilieres/fourmiliere_un.txt'
+
+anthills_names =  { 1 : 'Fourmilieres/fourmiliere_un.txt', \
+                    2 : 'Fourmilieres/fourmiliere_deux.txt', \
+                    3 : 'Fourmilieres/fourmiliere_trois.txt', \
+                    4 : 'Fourmilieres/fourmiliere_quatre.txt', \
+                    5 : 'Fourmilieres/fourmiliere_cinq.txt' \
+                    }
 
 file_name = anthills_names[anthill] # print('file name', file_name)
 
@@ -20,55 +22,56 @@ node_nb = param[1]
 node_list = param[2]
 edge_nb = param[3]
 edge_list = param[4]
-# print('edge_list', edge_list)
-
-edge_list = name_to_index(node_list,edge_list) # print('edge_list', edge_list)
 
 # matrix = matrix_data(param, edge_list)
 # print('matrix\n',matrix)
 
-node_list = [*range(node_nb)]
-# print('node_list', node_list, 'edge_list', edge_list)
-
 hill1 = Anthill(ant_nb, node_nb, node_list)
 
-G = graph_creation(0, node_list, edge_list, show=False)
-print(G.graph,G.nodes.data())
-# print(G.nodes[0])
-# print(G)
+G = graph_creation(0, anthill, ant_nb, node_list, edge_list, show=True)
 
-# print(list(G.nodes))
-# print(list(G.edges))
+paths_list = paths_list(G, 'Sv', 'Sd')
 
-for step in range(2):
-    print('\nSTEP ' + str(step) + '\n')
-    print(G.graph,G.nodes.data())
+path = paths_list[0]
 
-    for ant in reversed(hill1.ants):
-        print(ant)
+step = 0
+print('\nSTEP ' + str(step))
+# print(G.nodes.data())
+
+while G.nodes['Sd']['ants'] != ant_nb:
+
+    for ant in hill1.ants:
         node = ant.origin
-        print('//node//',node)
-        # print('//G.adj[' + str(node) + ']//',G.adj[node])
-        # print('//list(G.adj[' + str(node) + '])//',list(G.adj[node]))
-        # print('//list(G.adj[' + str(node) + '][0])//', list(G.adj[node])[0])
-        print('\n')
+        if len(paths_list) != 1:
+            if ant.index < 25:
+                path = paths_list[1]
+            else:
+                path = paths_list[0]
 
-        # node = G.nodes[ant.origin]
-        
-        # print('node[1]', node[1])
-        # for node in list(G.nodes):
-        # print(G.nodes[node])
-        # print(G.nodes[node]['ants'])
+        if node != 'Sd':
+            
+            dest = path[ant.steps][1]
 
-        
-        for adj in list(G.adj[node]):
-            # print(G.nodes[adj])
-            # print(G.nodes[adj]['ants'])
-
-            if G.nodes[adj]['ants'] == 0:
+            if G.nodes[dest]['ants'] < G.nodes[dest]['capacity']:
                 G.nodes[node]['ants'] = G.nodes[node]['ants'] - 1
-                G.nodes[adj]['ants'] = G.nodes[adj]['ants'] + 1
+                G.nodes[dest]['ants'] = G.nodes[dest]['ants'] + 1
 
-        ant.origin = adj
+                ant.origin = dest
+                print('ant', ant.index,': from', node, 'to', dest)
         
-    G.graph['step'] = G.graph['step'] + 1
+                ant.steps = ant.steps + 1
+
+    step = step + 1   
+    G.graph['step'] = step
+    
+    print('\nSTEP ' + str(step))
+    # print(G.nodes.data())
+
+print('END\n')
+
+import networkx as nx
+import numpy
+# import scipy as sp
+matrix = nx.to_numpy_array(G)
+# nx.adjacency_matrix(G)
+print('\n',matrix,'\n')
