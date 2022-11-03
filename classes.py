@@ -67,7 +67,8 @@ class Anthill():
             if to_end_attributes[node] == self.node_nb:
                 to_end_attributes[node] = ''
                 
-            labels.append((node, node + '\n' + str(to_end_attributes[node]) + '\n' + str(ants_attributes[node]) + '/' + str(capacity_attributes[node])))
+            # labels.append((node, node + '\n' + str(to_end_attributes[node]) + '\n' + str(ants_attributes[node]) + '/' + str(capacity_attributes[node])))
+            labels.append((node, node + '\n' + str(ants_attributes[node]) + '\n(' + str(to_end_attributes[node]) + ')')) #/' + str(capacity_attributes[node])))
 
         labels = dict(labels)
 
@@ -77,7 +78,13 @@ class Anthill():
 
         for node in G.nodes():
 
-            if ants_attributes[node] == 0:
+            if node == 'Sv':
+                colors.append('tab:orange')
+                
+            elif dead_end_attributes[node]:
+                colors.append('tab:red')
+
+            elif ants_attributes[node] == 0:
                 colors.append('tab:blue')
 
             elif ants_attributes[node] < capacity_attributes[node]:
@@ -87,7 +94,7 @@ class Anthill():
                 colors.append('tab:green')
 
             else:
-                colors.append('tab:brown')
+                colors.append('tab:grey')
 
 
         # Sets edge colors depending on dead end status
@@ -98,7 +105,7 @@ class Anthill():
             if dead_end_attributes[edge[1]]:
                 edge_colors.append('tab:red')
             else:
-                edge_colors.append('tab:blue')
+                edge_colors.append('tab:grey')
 
         self.plot_data.append((labels, colors, edge_colors))        
 
