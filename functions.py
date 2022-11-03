@@ -4,7 +4,7 @@ import numpy
 # Data file parcing
 def import_data(file_name):
 
-    data = pandas.read_table(file_name,header=None)
+    data = pandas.read_table(file_name, header=None)
     data = data.to_numpy()
 
     # Get ant number
@@ -32,15 +32,18 @@ def import_data(file_name):
     
     node_list.append(('Sd', {'capacity' : ant_nb}))
 
+
     # Get edge number
     edge_nb = data.shape[0] - node_nb - 1 + 2
 
-    # Get edge list with names and ' - ' separator
+
+    # Get edge list
     edge_list = []
 
     for i in range(1 + node_nb - 2, data.shape[0]):
         edge = data[i][0].split(' - ')
         edge = (edge[0], edge[1])
-        edge_list .append(edge)
+        edge_list.append(edge)
 
-    return(ant_nb, node_nb, node_list, edge_nb, edge_list)
+
+    return (ant_nb, node_nb, node_list, edge_nb, edge_list)
