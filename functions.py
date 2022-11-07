@@ -5,6 +5,7 @@ import numpy
 def import_data(file_name):
 
     data = pandas.read_table(file_name, header=None)
+    print(data)
     data = data.to_numpy()
 
     # Get ant number
