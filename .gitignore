@@ -1,4 +1,4 @@
-.__pycache__/
-.Oldies/
-.Ex 1 F4/
-.Ex 2 F4/
+.__pycache__/*
+.Oldies/*
+.Ex 1 F4/*
+.Ex 2 F4/*
