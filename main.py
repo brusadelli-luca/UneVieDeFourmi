@@ -18,23 +18,10 @@ file_name = anthills_names[anthill]
 
 # Data set file parsing
 param = import_data(file_name)
-# print('\n')
-# print('Ant number :', param[0])
-# print('\n')
-# print('Node number :', param[1])
-# print('\n')
-# print('Node list :\n', param[2])
-# print('\n')
-# print('Edge number :', param[3])
-# print('\n')
-# print('Edge list :\n', param[4])
-# print('\n')
+
 
 ant_nb = param[0]
 node_nb = param[1]
-# node_list = param[2]
-# edge_nb = param[3]
-# edge_list = param[4]
 
 
 # Create anthill (ants list) and node graph
