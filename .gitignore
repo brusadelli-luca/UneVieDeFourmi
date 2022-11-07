@@ -1,5 +1,6 @@
 *.pyc
 *.png
+*.txt
 /Oldies
-/Ex 1 F4/*
-/Ex 2 F4/*
+/Ex 1 F4
+/Ex 2 F4
