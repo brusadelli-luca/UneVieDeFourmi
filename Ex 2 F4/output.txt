@@ -1,0 +1,83 @@
+STEP 0
+
+STEP 1
+ant 0 : moves from Sv to S1
+ant 1 : moves from Sv to S1
+
+STEP 2
+ant 0 : moves from S1 to S2
+ant 1 : moves from S1 to S3
+ant 2 : moves from Sv to S1
+ant 3 : moves from Sv to S1
+
+STEP 3
+ant 0 : moves from S2 to S4
+ant 1 : moves from S3 to S4
+ant 2 : moves from S1 to S2
+ant 3 : moves from S1 to S3
+ant 4 : moves from Sv to S1
+ant 5 : moves from Sv to S1
+
+STEP 4
+ant 0 : moves from S4 to S5
+ant 1 : moves from S4 to S6
+ant 2 : moves from S2 to S4
+ant 3 : moves from S3 to S4
+ant 4 : moves from S1 to S3
+ant 5 : moves from S1 to S2
+ant 6 : moves from Sv to S1
+ant 7 : moves from Sv to S1
+
+STEP 5
+ant 0 : moves from S5 to Sd
+ant 1 : moves from S6 to Sd
+ant 2 : moves from S4 to S5
+ant 3 : moves from S4 to S6
+ant 4 : moves from S3 to S4
+ant 5 : moves from S2 to S4
+ant 6 : moves from S1 to S3
+ant 7 : moves from S1 to S2
+ant 8 : moves from Sv to S1
+ant 9 : moves from Sv to S1
+
+STEP 6
+ant 2 : moves from S5 to Sd
+ant 3 : moves from S6 to Sd
+ant 4 : moves from S4 to S5
+ant 5 : moves from S4 to S6
+ant 6 : moves from S3 to S4
+ant 7 : moves from S2 to S4
+ant 8 : moves from S1 to S3
+ant 9 : moves from S1 to S2
+
+STEP 7
+ant 4 : moves from S5 to Sd
+ant 5 : moves from S6 to Sd
+ant 6 : moves from S4 to S5
+ant 7 : moves from S4 to S6
+ant 8 : moves from S3 to S4
+ant 9 : moves from S2 to S4
+
+STEP 8
+ant 6 : moves from S5 to Sd
+ant 7 : moves from S6 to Sd
+ant 8 : moves from S4 to S2
+ant 9 : moves from S4 to S5
+
+STEP 9
+ant 8 : moves from S2 to S1
+ant 9 : moves from S5 to Sd
+
+STEP 10
+ant 8 : moves from S1 to S3
+
+STEP 11
+ant 8 : moves from S3 to S4
+
+STEP 12
+ant 8 : moves from S4 to S6
+
+STEP 13
+ant 8 : moves from S6 to Sd
+
+END

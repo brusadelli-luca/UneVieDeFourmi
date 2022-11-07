@@ -58,17 +58,20 @@ class Anthill():
         dead_end_attributes = nx.get_node_attributes(G, 'dead_end')
         to_end_attributes = nx.get_node_attributes(G, 'to_end')
         capacity_attributes = nx.get_node_attributes(G, 'capacity')
-        
+       
 
         # Builds labels with attributes
         labels = []
         
         for node in G.nodes():
             if to_end_attributes[node] == self.node_nb:
-                to_end_attributes[node] = ''
+                cost = '\n'
+
+            else:
+                cost = '\n-->' + str(to_end_attributes[node]) # + ')'
                 
             # labels.append((node, node + '\n' + str(to_end_attributes[node]) + '\n' + str(ants_attributes[node]) + '/' + str(capacity_attributes[node])))
-            labels.append((node, node + '\n' + str(ants_attributes[node]) + '\n(' + str(to_end_attributes[node]) + ')')) #/' + str(capacity_attributes[node])))
+            labels.append((node, node + '\n' + str(ants_attributes[node]) + cost)) #/' + str(capacity_attributes[node])))
 
         labels = dict(labels)
 
@@ -107,7 +110,8 @@ class Anthill():
             else:
                 edge_colors.append('tab:grey')
 
-        self.plot_data.append((labels, colors, edge_colors))        
+        # self.plot_data.append((labels, colors, edge_colors, [(i + 1) * 100 for i in list(ants_attributes.values())]))        
+        self.plot_data.append((labels, colors, edge_colors, [(i + 1) * 100 for i in list(capacity_attributes.values())]))        
 
 
     def print_ants(self):

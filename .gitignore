@@ -1,4 +1,5 @@
-.__pycache__/*
-.Oldies/*
-.Ex 1 F4/*
-.Ex 2 F4/*
+*.pyc
+*.png
+/Oldies
+/Ex 1 F4/*
+/Ex 2 F4/*

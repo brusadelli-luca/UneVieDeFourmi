@@ -4,7 +4,7 @@ from functions import *
 import matplotlib.pyplot as plt
 
 # Select data set (anthill number)
-anthill = 3
+anthill = int(input('Which anthill want to explore ? '))
 
 anthills_names =  { 1 : '../Fourmilieres/fourmiliere_un.txt', \
                     2 : '../Fourmilieres/fourmiliere_deux.txt', \
@@ -18,12 +18,23 @@ file_name = anthills_names[anthill]
 
 # Data set file parsing
 param = import_data(file_name)
+# print('\n')
+# print('Ant number :', param[0])
+# print('\n')
+# print('Node number :', param[1])
+# print('\n')
+# print('Node list :\n', param[2])
+# print('\n')
+# print('Edge number :', param[3])
+# print('\n')
+# print('Edge list :\n', param[4])
+# print('\n')
 
 ant_nb = param[0]
 node_nb = param[1]
-node_list = param[2]
-edge_nb = param[3]
-edge_list = param[4]
+# node_list = param[2]
+# edge_nb = param[3]
+# edge_list = param[4]
 
 
 # Create anthill (ants list) and node graph
@@ -37,6 +48,7 @@ step = 0
 print('\nSTEP ' + str(step))
 
 file.write('STEP ' + str(step))
+hill1.save_graph_data()
 
 G = hill1.graph
 
@@ -48,7 +60,6 @@ while G.nodes['Sd']['ants'] != ant_nb:
     file.write('\n\nSTEP ' + str(step))
 
     for ant in hill1.ants:
-
         node = ant.pos
         dest = ''
 
@@ -71,7 +82,11 @@ while G.nodes['Sd']['ants'] != ant_nb:
                 dest = 'Sd'
 
             else:
-
+                
+                # Can't go back if other choice available
+                if ant.origin in dest_list:
+                    dest_list.remove(ant.origin)
+                
                 # Sort destinations by cost to end
                 dest_list_t = []
 
@@ -80,18 +95,18 @@ while G.nodes['Sd']['ants'] != ant_nb:
 
                 dest_list = dest_list_t
                 dest_list = rd.sample(dest_list, len(dest_list))
-                sorted(dest_list, key=lambda dest:dest[1])
-                
+                dest_list = sorted(dest_list, key=lambda dest: dest[1])
+
                 # Fwd if possible
                 for dest_i in dest_list:
                     dest_i = dest_i[0]
                     
-                    if G.nodes[dest_i]['ants'] < G.nodes[dest_i]['capacity'] and \
-                        (dest_i != ant.origin or (dest_i != ant.origin and dest_list.index(dest_i) == (len(dest_list) - 1))): 
+                    if G.nodes[dest_i]['ants'] < G.nodes[dest_i]['capacity']: # and \
+                        #(dest_i != ant.origin) # or (dest_i != ant.origin and dest_list.index(dest_i) == (len(dest_list) - 1))): 
                         
                         dest = dest_i
-                        break      
-            
+                        break                    
+
             # Move ant
             if dest != '':
 
@@ -115,6 +130,7 @@ while G.nodes['Sd']['ants'] != ant_nb:
                     if cost < G.nodes[ant.origin]['to_end']:
                         G.nodes[ant.origin]['to_end'] = cost
 
+
     # Saves plot data in anthill
     hill1.save_graph_data()
 
@@ -128,8 +144,8 @@ step = 0
 for data in hill1.plot_data:
 
     plt.clf()
-    plt.title("FOURMILIERE N° " + str(anthill) + '\n Step : ' + str(step))
-    nx.draw(G, labels=data[0], with_labels=True, node_color=data[1], edge_color=data[2], pos=hill1.pos)
+    plt.title("ANTHILL N° " + str(anthill) + '\n Step : ' + str(step))
+    nx.draw(G, labels=data[0], with_labels=True, node_color=data[1], edge_color=data[2], node_size=data[3], pos=hill1.pos)
     plt.savefig(str(step) + ".png")
     step = step + 1
     plt.pause(1)
