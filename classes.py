@@ -1,5 +1,3 @@
-from functions import *
-import numpy
 import networkx as nx
 
 # Ant class definition
@@ -42,8 +40,6 @@ class Anthill():
         self.pos = nx.spring_layout(G)
         self.graph = G
 
-        self.matrix = nx.to_numpy_array(G)
-
         self.plot_data = []
 
 
@@ -68,10 +64,9 @@ class Anthill():
                 cost = '\n'
 
             else:
-                cost = '\n-->' + str(to_end_attributes[node]) # + ')'
+                cost = '\n-->' + str(to_end_attributes[node])
                 
-            # labels.append((node, node + '\n' + str(to_end_attributes[node]) + '\n' + str(ants_attributes[node]) + '/' + str(capacity_attributes[node])))
-            labels.append((node, node + '\n' + str(ants_attributes[node]) + cost)) #/' + str(capacity_attributes[node])))
+            labels.append((node, node + '\n' + str(ants_attributes[node]) + cost))
 
         labels = dict(labels)
 
@@ -110,7 +105,6 @@ class Anthill():
             else:
                 edge_colors.append('tab:grey')
 
-        # self.plot_data.append((labels, colors, edge_colors, [(i + 1) * 100 for i in list(ants_attributes.values())]))        
         self.plot_data.append((labels, colors, edge_colors, [(i + 1) * 100 for i in list(capacity_attributes.values())]))        
 
 
@@ -118,7 +112,3 @@ class Anthill():
         print('\nAnts status :')
         for ant in self.ants:
             print(ant)
-
-    def Status(self):
-        self.print_ants()
-        print('\n')
