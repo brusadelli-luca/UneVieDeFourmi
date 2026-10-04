@@ -55,7 +55,7 @@ while G.nodes['Sd']['ants'] != ant_nb:
             dest_list = list(iter(G[node]))
 
             # Removes dead ends from destinations list
-            for dest_i in dest_list:
+            for dest_i in list(dest_list):
                 if G.nodes[dest_i]['dead_end'] == True:
                     dest_list.remove(dest_i)
 
@@ -123,6 +123,7 @@ while G.nodes['Sd']['ants'] != ant_nb:
 
 print('END\n')
 file.write('\n\nEND')
+file.close()
 
 
 # Plot animation

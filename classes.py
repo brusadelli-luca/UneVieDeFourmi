@@ -13,7 +13,7 @@ class Ant():
     def __str__(self):
         return 'ant description => index : ' + str(self.index) \
             + ' / origin : ' + str(self.origin) \
-            + ' / dest : ' + str(self.dest)
+            + ' / pos : ' + str(self.pos)
 
 
 # Anthill class definition
@@ -105,7 +105,7 @@ class Anthill():
 
         for edge in G.edges():
 
-            if dead_end_attributes[edge[1]]:
+            if dead_end_attributes[edge[0]] or dead_end_attributes[edge[1]]:
                 edge_colors.append('tab:red')
             else:
                 edge_colors.append('tab:grey')
