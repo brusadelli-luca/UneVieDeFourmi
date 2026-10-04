@@ -7,24 +7,26 @@ Make all the ants go from the anthill entrance (`Sv`) to the exit (`Sd`) in as f
 The anthill is a graph: rooms are nodes, tunnels are edges, and each room can hold a limited number of ants.
 
 ## Requirements
-* Python 3 (files were first run with Python 3.10)
-* pandas, numpy, networkx, matplotlib
-* numpy older than 2.4 (for example `pip install "numpy<2"`): with newer versions `import_data` in `functions.py` stops with a `TypeError`
+* Python 3 (tested with Python 3.12 and 3.14)
+* pandas, numpy, networkx, matplotlib, listed in `requirements.txt`
+
+From the project folder, create a virtual environment and install the libraries (Windows commands):
 
 ```
-pip install pandas "numpy<2" networkx matplotlib
+python -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
 ```
 
 ## Instructions
 1. Put the anthill description files in a folder named `Fourmilieres`, **next to** the project folder (not inside it): `../Fourmilieres/fourmiliere_un.txt`, `fourmiliere_deux.txt`, `fourmiliere_trois.txt`, `fourmiliere_quatre.txt`, `fourmiliere_cinq.txt`.
    These files are not in the repository (`*.txt` is ignored by git).
-2. Run `python main.py` from the project folder.
+2. Run `.venv\Scripts\python main.py` from the project folder.
 3. Type the anthill number (1 to 5) when asked.
 
 ## Data file format
 * First line: number of ants, written `f=<number>` (example: `f=3`).
-* Then one line per room, except `Sv` and `Sd` which are added automatically: `name`, or `name x capacity`.
-  Without a capacity, a room holds 1 ant. The middle value is not used by the program.
+* Then one line per room, except `Sv` and `Sd` which are added automatically: `name`, or `name x capacity` (the provided files use `S1 { 2 }`).
+  Without a capacity, a room holds 1 ant. Only the third word is read as the capacity, the middle one is not used.
 * Then one line per tunnel: `room1 - room2` (with spaces around the dash). Tunnels can go both ways.
 
 Example:
@@ -50,7 +52,7 @@ At each step, every ant that is not yet in `Sd` tries to move once:
 The loop stops when all ants are in `Sd`. As there is some randomness, the number of steps can change from one run to another.
 
 ## Output
-* Console: the moves of each step (`ant 0 : from Sv to S1`).
+* Console: the content of the data file, then the moves of each step (`ant 0 : from Sv to S1`).
 * `output.txt`: the same moves. The file is **appended** at each run, delete it to start a new log.
 * An animation window showing the anthill step by step (1 second per step), and one image per step saved in the project folder (`0.png`, `1.png`, ...).
 
@@ -58,7 +60,7 @@ Colours in the animation:
 * orange: entrance `Sv`
 * blue: empty room
 * grey: room with ants
-* red: dead end
+* red: dead end, and tunnels leading to a dead end
 * green: exit `Sd` when all ants have arrived
 
 Each room shows its name, its number of ants and the estimated distance to the exit (`-->3`). The size of a room depends on its capacity.
@@ -71,3 +73,4 @@ Each room shows its name, its number of ants and the estimated distance to the e
 ## Known limits
 * The data files must be provided separately (see Instructions).
 * The result is not guaranteed to be the shortest solution: ants choose their way one step at a time.
+* An ant whose next room is full does not wait: it can go back, even to `Sv`. `Sv` is then marked as a dead end, and its tunnel turns red. This is why anthill 3 sometimes needs 12 steps instead of 7.
