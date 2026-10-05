@@ -2,6 +2,8 @@
 
 Algorithm class project.
 
+Code written in October-November 2022. Review and fixes done with Claude in October 2026 (see the commits marked `Co-Authored-By: Claude`).
+
 ## Goal of the project
 Make all the ants go from the anthill entrance (`Sv`) to the exit (`Sd`) in as few steps as possible.
 The anthill is a graph: rooms are nodes, tunnels are edges, and each room can hold a limited number of ants.
