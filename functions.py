@@ -16,7 +16,7 @@ def import_data(file_name):
 
         if '-' in str(cell):
 
-            node_nb = int(numpy.where(data==cell)[0]) - 1 + 2
+            node_nb = int(numpy.where(data==cell)[0][0]) - 1 + 2
             break
 
 

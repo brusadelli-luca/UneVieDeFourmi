@@ -1,7 +1,8 @@
-from classes import *
 import random as rd
-from functions import *
 import matplotlib.pyplot as plt
+import networkx as nx
+from classes import Anthill
+from functions import import_data
 
 # Select data set (anthill number)
 anthill = int(input('Which anthill want to explore ? '))
@@ -55,7 +56,7 @@ while G.nodes['Sd']['ants'] != ant_nb:
             dest_list = list(iter(G[node]))
 
             # Removes dead ends from destinations list
-            for dest_i in dest_list:
+            for dest_i in list(dest_list):
                 if G.nodes[dest_i]['dead_end'] == True:
                     dest_list.remove(dest_i)
 
@@ -88,8 +89,7 @@ while G.nodes['Sd']['ants'] != ant_nb:
                 for dest_i in dest_list:
                     dest_i = dest_i[0]
                     
-                    if G.nodes[dest_i]['ants'] < G.nodes[dest_i]['capacity']: # and \
-                        #(dest_i != ant.origin) # or (dest_i != ant.origin and dest_list.index(dest_i) == (len(dest_list) - 1))): 
+                    if G.nodes[dest_i]['ants'] < G.nodes[dest_i]['capacity']:
                         
                         dest = dest_i
                         break                    
@@ -123,6 +123,7 @@ while G.nodes['Sd']['ants'] != ant_nb:
 
 print('END\n')
 file.write('\n\nEND')
+file.close()
 
 
 # Plot animation
