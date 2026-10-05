@@ -6,3 +6,4 @@
 /Ex 2 F4/*
 .venv/
 !requirements.txt
+!data/*.txt
