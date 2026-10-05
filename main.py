@@ -7,11 +7,11 @@ from functions import import_data
 # Select data set (anthill number)
 anthill = int(input('Which anthill want to explore ? '))
 
-anthills_names =  { 1 : '../Fourmilieres/fourmiliere_un.txt', \
-                    2 : '../Fourmilieres/fourmiliere_deux.txt', \
-                    3 : '../Fourmilieres/fourmiliere_trois.txt', \
-                    4 : '../Fourmilieres/fourmiliere_quatre.txt', \
-                    5 : '../Fourmilieres/fourmiliere_cinq.txt' \
+anthills_names =  { 1 : 'data/fourmiliere_un.txt', \
+                    2 : 'data/fourmiliere_deux.txt', \
+                    3 : 'data/fourmiliere_trois.txt', \
+                    4 : 'data/fourmiliere_quatre.txt', \
+                    5 : 'data/fourmiliere_cinq.txt' \
                     }
 
 file_name = anthills_names[anthill]
