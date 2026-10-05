@@ -20,8 +20,7 @@ python -m venv .venv
 ```
 
 ## Instructions
-1. Put the anthill description files in a folder named `Fourmilieres`, **next to** the project folder (not inside it): `../Fourmilieres/fourmiliere_un.txt`, `fourmiliere_deux.txt`, `fourmiliere_trois.txt`, `fourmiliere_quatre.txt`, `fourmiliere_cinq.txt`.
-   These files are not in the repository (`*.txt` is ignored by git).
+1. The 5 anthills are in the `data` folder: `fourmiliere_un.txt`, `fourmiliere_deux.txt`, `fourmiliere_trois.txt`, `fourmiliere_quatre.txt`, `fourmiliere_cinq.txt`.
 2. Run `.venv\Scripts\python main.py` from the project folder.
 3. Type the anthill number (1 to 5) when asked.
 
@@ -71,8 +70,8 @@ Each room shows its name, its number of ants and the estimated distance to the e
 * `main.py`: asks the anthill number, runs the simulation and shows the animation.
 * `classes.py`: `Ant` (index, current room, previous room, steps) and `Anthill` (ants, graph built with networkx, data for the animation).
 * `functions.py`: `import_data`, reads the data file and returns ants, rooms and tunnels.
+* `data/`: the 5 anthill description files.
 
 ## Known limits
-* The data files must be provided separately (see Instructions).
 * The result is not guaranteed to be the shortest solution: ants choose their way one step at a time.
 * An ant whose next room is full does not wait: it can go back, even to `Sv`. `Sv` is then marked as a dead end, and its tunnel turns red. This is why anthill 3 sometimes needs 12 steps instead of 7.
