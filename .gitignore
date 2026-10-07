@@ -7,3 +7,7 @@
 .venv/
 !requirements.txt
 !data/*.txt
+.env
+kaggle.json
+*.pem
+*.key
