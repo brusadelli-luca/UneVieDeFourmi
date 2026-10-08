@@ -105,10 +105,4 @@ class Anthill():
             else:
                 edge_colors.append('tab:grey')
 
-        self.plot_data.append((labels, colors, edge_colors, [(i + 1) * 100 for i in list(capacity_attributes.values())]))        
-
-
-    def print_ants(self):
-        print('\nAnts status :')
-        for ant in self.ants:
-            print(ant)
+        self.plot_data.append((labels, colors, edge_colors, [(i + 1) * 100 for i in list(capacity_attributes.values())]))
